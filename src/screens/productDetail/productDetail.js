@@ -1,15 +1,16 @@
-import {Button, SafeAreaView, Text, View} from 'react-native';
+import {Button, Image, SafeAreaView, Text, View} from 'react-native';
 
 import React from 'react';
 import styles from './styles';
 
-const productDetail = ({navigation}) => {
+const productDetail = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text>Detail</Text>
+        <Text>{route.params.name}</Text>
+        <Text>${route.params.product.precio}</Text>
         <Button
-          title="Go back to categories"
+          title="Categorias"
           onPress={() => navigation.navigate('categories')}
         />
       </View>
