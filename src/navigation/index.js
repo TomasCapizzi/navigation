@@ -1,20 +1,48 @@
+import CartNavigation from './cart/index';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import categories from '../screens/categories/categories';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import productDetail from '../screens/productDetail/productDetail';
-import products from '../screens/products/products';
+import ShopNavigation from './shop/index';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
 
 const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="categories" component={categories} />
-        <Stack.Screen name="products" component={products} />
-        <Stack.Screen name="detail" component={productDetail} />
-      </Stack.Navigator>
+      <BottomTab.Navigator
+        initialRouteName="shop"
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}>
+        <BottomTab.Screen
+          name="shop"
+          component={ShopNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Ionicons
+                name={focused ? 'md-home' : 'md-home-outline'}
+                size={24}
+                color={'black'}
+              />
+            ),
+          }}
+        />
+        <BottomTab.Screen
+          name="cart"
+          component={CartNavigation}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Ionicons
+                name={focused ? 'md-cart' : 'md-cart-outline'}
+                size={24}
+                color={'black'}
+              />
+            ),
+          }}
+        />
+      </BottomTab.Navigator>
     </NavigationContainer>
   );
 };
