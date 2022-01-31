@@ -4,8 +4,7 @@ export const productsList = [
     title: 'Pan Saborizado',
     category: '4',
     precio: 350,
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYaffBNe3ttKLNPkGv4MVTW5Eq4Do53q_G5g&usqp=CAU'
-  },
+   },
   {
     id: 2,
     title: 'Budines',
