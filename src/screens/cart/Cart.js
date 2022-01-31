@@ -2,27 +2,22 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
 import CartItem from '../../components/CartItem/CartItem';
 import React from 'react';
-import {cartFake} from '../../utils/data/cartFake';
 import styles from './styles';
+import {useSelector} from 'react-redux';
 
 export default function Cart() {
-  const items = cartFake;
-
-  const total = items.reduce(
-    (acc, item) => acc + item.precio * item.cantidad,
-    0,
-  );
+  const cartItems = useSelector(state => state.cart.selected)
 
   const confirmPurchase = () => {
-    console.warn('Compra confirmada');
+    console.warn('Compra confirmada', cartItems);
   };
 
   const onDelete = id => {
     console.warn('Eliminar item', id);
   };
 
-  const renderCart = data => {
-    <CartItem item={data.item} onDelete={onDelete} />;
+  const renderCart = ({item}) => {
+    <CartItem item={item} onDelete={onDelete} />;
   };
 
   return (
@@ -31,7 +26,7 @@ export default function Cart() {
       <View style={styles.list}>
         <Text>Listado</Text>
         <FlatList
-          data={items}
+          data={cartItems}
           renderItem={renderCart}
           keyExtractor={item => item.id}
         />
@@ -41,7 +36,7 @@ export default function Cart() {
         <TouchableOpacity onPress={() => confirmPurchase()}>
           <Text>Confirm</Text>
           <View>
-            <Text>Total: ${total}</Text>
+            <Text>Total: 100</Text>
           </View>
         </TouchableOpacity>
       </View>
